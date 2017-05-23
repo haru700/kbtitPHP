@@ -1,0 +1,41 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- // Google Maps APIのJavaScriptを出力 -->
+
+        	    <meta name='viewport' content='initial-scale=1.0, user-scalable=no' />
+        	<script type='text/javascript' src='//maps.google.com/maps/api/js?sensor=true'></script>    <script type="text/javascript" charset="utf-8">
+//<![CDATA[
+/*************************************************
+ * Created with GoogleMapAPI3.0beta
+ * Author: Brad Wedell <brad AT mycnl DOT com>
+ * Link http://code.google.com/p/php-google-map-api/
+ * Copyright 2010-2012 Brad Wedell
+ * Original Author: Monte Ohrt <monte AT ohrt DOT com>
+ * Original Copyright 2005-2006 New Digital Group
+ * Originial Link http://www.phpinsider.com/php/code/GoogleMapAPI/
+ *************************************************/
+var infowindow=new google.maps.InfoWindow();var markersmap=[];var sidebar_htmlmap='';var marker_htmlmap=[];var to_htmlsmap=[];var from_htmlsmap=[];var mapmap=null;function onLoadmap(){var mapObjmap=document.getElementById("map");if(mapObjmap!='undefined'&&mapObjmap!=null){var mapOptionsmap={scrollwheel:true,zoom:17,draggable:1,maxZoom:null,minZoom:null,mapTypeId:google.maps.MapTypeId.ROADMAP,mapTypeControl:true,mapTypeControlOptions:{style:google.maps.MapTypeControlStyle.DEFAULT}};var stylesmap=1;mapmap=new google.maps.Map(mapObjmap,mapOptionsmap);mapmap.setOptions({styles:stylesmap});var point=new google.maps.LatLng(,);markersmap.push(createMarker(mapmap,point,"井之頭公園周辺マップ","井之頭公園の入口",'','',"sidebar_map",''));}}
+function createMarker(map,point,title,html,icon,icon_shadow,sidebar_id,openers){var marker_options={position:point,map:map,title:title};if(icon!=''){marker_options.icon=icon;}
+if(icon_shadow!=''){marker_options.shadow=icon_shadow;}
+var new_marker=new google.maps.Marker(marker_options);if(html!=''){google.maps.event.addListener(new_marker,'click',function(){infowindow.close();infowindow.setContent(html);infowindow.open(map,new_marker);});if(openers!=''&&!isEmpty(openers)){for(var i in openers){var opener=document.getElementById(openers[i]);opener.onclick=function(){infowindow.close();infowindow.setContent(html);infowindow.open(map,new_marker);return false;};}}
+if(sidebar_id!=''){var sidebar=document.getElementById(sidebar_id);if(sidebar!=null&&sidebar!=undefined&&title!=null&&title!=''){var newlink=document.createElement('a');newlink.onclick=function(){infowindow.open(map,new_marker);return false};newlink.innerHTML=title;sidebar.appendChild(newlink);}}}
+return new_marker;}
+function isArray(a){return isObject(a)&&a.constructor==Array;}
+function isObject(a){return(a&&typeof a=='object')||isFunction(a);}
+function isFunction(a){return typeof a=='function';}
+function isEmpty(obj){for(var i in obj){return false;}return true;}//]]>
+</script>
+  </head>
+  <body>
+    <!-- // Google Maps サイドバーそ出力 -->
+    <script type="text/javascript">window.onload=onLoadmap;</script>    <script type="text/javascript" charset="utf-8">
+//<![CDATA[
+document.write('<div id="map" style="width: 500px; height: 500px; position:relative;"><\/div>');
+//]]>
+</script>
+<noscript><b>Javascript must be enabled in order to use Google Maps.</b></noscript>
+    <div id="sidebar_map" class="sidebar_map"></div>
+  </body>
+</html>
